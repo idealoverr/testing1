@@ -1,0 +1,98 @@
+﻿@{
+    Layout = "/Views/Shared/_CusLayout.cshtml";//using the customized layout
+    ViewData["Title"] = "Home Page";
+}
+@model IEnumerable<CA_Project.Models.Good>
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+<script language="javasript">
+    function add() {
+
+    }
+</script>
+
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .add-button {
+            display: block;
+            width: 100px;
+            margin-left: 0px auto;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+            .add-button:hover {
+                background-color: #0056b3;
+            }
+    </style>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Introduction</th>
+                <th>Operation</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Good item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Price</td>
+                    <td>@item.Intro</td>
+                    <td>
+                        <form asp-action="Add" method="post">
+                            <input type="hidden" id="@item.Name" name="ProductName" value="@item.Name">
+                            <input type="submit" class="add-button" value="Add to cart">
+                            @if (TempData["Message"] != null)
+                            {
+                                <script type="text/javascript">
+                                    window.onload = function () {
+                                        alert("@TempData["Message"]");
+                                    };
+                                </script>
+                            }                           
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
