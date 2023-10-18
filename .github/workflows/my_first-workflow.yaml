@@ -1,15 +1,11 @@
-name: first_one
-on: 
+name: first_workflow
+on:
     push
-
+   
 jobs:
-     hello:
+      pr-deploy:
         runs-on: ubuntu-latest
         steps:
-        -name: Echo current branch
-        -run: encho "$(date):current branch is $((github.ref_name))"
-
-        -name: Checkout source
-         uses: actions/checkout@v2
+          - run: echo "deploy...."
 
 
