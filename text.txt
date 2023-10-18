@@ -1,0 +1,3 @@
+app.get('/time',(req,reso)=>{
+    resp.send(time:(new Date()).toIDOString())
+})
