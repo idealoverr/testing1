@@ -5,8 +5,11 @@ on:
 jobs:
      hello:
         runs-on: ubuntu-latest
-        steps: 
+        steps:
         -name: Echo current branch
         -run: encho "$(date):current branch is $((github.ref_name))"
+
+        -name: Checkout source
+         uses: actions/checkout@v2
 
 
